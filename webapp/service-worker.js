@@ -1,4 +1,4 @@
-var GHPATH = '/cookie-crumb';
+var GHPATH = '/cookie-crumb/webapp';
 var VERSION = '0.1';
 
 
