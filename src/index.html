@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="static/favicon.ico">
-  <link rel="manifest" href="/cookie-crumb/manifest.webmanifest">
+  <link rel="manifest" href="/cookie-crumb/webapp/manifest.webmanifest">
 
   <title>CookieCrumbs</title>
 
@@ -1139,8 +1139,8 @@
   <script>
     if (navigator.serviceWorker) {
       navigator.serviceWorker.register (
-        '/cookie-crumb/service-worker.js',
-        {scope: '/cookie-crumb/'}
+        '/cookie-crumb/webapp/service-worker.js',
+        {scope: '/cookie-crumb/webapp/'}
       )
     }
   </script>
