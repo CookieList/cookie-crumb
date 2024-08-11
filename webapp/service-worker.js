@@ -12,12 +12,12 @@ var URLS = [
   `${GHPATH}/static/media.jpg`,
   `${GHPATH}/static/css/victormono.min.css`,
   `${GHPATH}/static/css/tailwind.min.css`,
-  `${GHPATH}/static/css/main.min.css`
-  `${GHPATH}/static/js/jquery.min.js`
-  `${GHPATH}/static/js/nunjucks.min.js`
-  `${GHPATH}/static/js/clipboard.min.js`
-  `${GHPATH}/static/js/lazyload.min.js`
-  `${GHPATH}/static/js/main.min.js`
+  `${GHPATH}/static/css/main.min.css`,
+  `${GHPATH}/static/js/jquery.min.js`,
+  `${GHPATH}/static/js/nunjucks.min.js`,
+  `${GHPATH}/static/js/clipboard.min.js`,
+  `${GHPATH}/static/js/lazyload.min.js`,
+  `${GHPATH}/static/js/main.min.js`,
 ]
 
 var CACHE_NAME = APP_PREFIX + "_version_" + String(VERSION)
