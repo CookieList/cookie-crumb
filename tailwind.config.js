@@ -1,8 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 
+var dynamicListViewClasses = []
+
+var formats = ['ANIME', 'MANGA', 'MUSIC', 'MOVIE', 'SPECIAL', 'NOVEL']
+var statuses = [
+  'CURRENT',
+  'PLANNING',
+  'COMPLETED',
+  'DROPPED',
+  'PAUSED',
+  'REPEATING'
+]
+for (const format of formats){
+  for (const status of statuses){
+    dynamicListViewClasses.push(`group-data-[selected-list-to-view='${format}-${status}']:block`);
+  }
+}
 
 module.exports = {
   content: ["./src/**/*.{html,js}"],
+  safelist: dynamicListViewClasses,
   theme: {
     extend: {
       colors: {

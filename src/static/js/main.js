@@ -1651,8 +1651,8 @@ function viewListsMedia(status) {
 
     $.state.selected_list_status = status;
 
-    stacked.attr("data-seleceted-list-to-view", $.state.selected_list_category + "-" + status);
-    grids.attr("data-seleceted-list-to-view", $.state.selected_list_category + "-" + status);
+    stacked.attr("data-selected-list-to-view", $.state.selected_list_category + "-" + status);
+    grids.attr("data-selected-list-to-view", $.state.selected_list_category + "-" + status);
 
     setTimeout(() => {
         $.id("[M]-lists").attr("data-current-lists-section", "media");

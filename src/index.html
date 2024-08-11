@@ -364,7 +364,7 @@
 
       <div class="relative flex w-full grow group" id="[M]" data-current-main-content="watchlist">
 
-        <div class="flex w-full grow h-full group absolute transition-transform overflow-hidden group-data-[current-main-content='watchlist']:translate-x-0 group-data-[current-main-content='schedule']:-translate-x-full group-data-[current-main-content='lists']:-translate-x-[200%]" id="[M]-watchlist" data-current-watchlist-format="stacked">
+        <div class="flex w-full duration-300 grow h-full group absolute transition-transform overflow-hidden group-data-[current-main-content='watchlist']:translate-x-0 group-data-[current-main-content='schedule']:-translate-x-full group-data-[current-main-content='lists']:-translate-x-[200%]" id="[M]-watchlist" data-current-watchlist-format="stacked">
 
           <template id="[M]-watchlist@icon.airingAnime">
             <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 stroke-emerald-500/80">
@@ -597,7 +597,7 @@
           </div>
         </div>
 
-        <div class="flex w-full h-full relative transition-transform flex-col overflow-hidden group-data-[current-main-content='watchlist']:translate-x-full group-data-[current-main-content='schedule']:translate-x-0 group-data-[current-main-content='lists']:-translate-x-full group" id="[M]-schedule" data-current-schedule-format="stacked">
+        <div class="flex w-full duration-300 h-full relative transition-transform flex-col overflow-hidden group-data-[current-main-content='watchlist']:translate-x-full group-data-[current-main-content='schedule']:translate-x-0 group-data-[current-main-content='lists']:-translate-x-full group" id="[M]-schedule" data-current-schedule-format="stacked">
 
           <div class="flex w-full h-full transition-transform absolute z-[97] group-data-[current-schedule-format='stacked']:translate-y-0 group-data-[current-schedule-format='grids']:-translate-y-full duration-300" id="[M]-schedule.stacked">
             <template id="[M]-schedule.stacked@template">
@@ -1013,9 +1013,9 @@
 
           <template id="[M]-lists.mediaContent@template.stacked">
             {% for status, media_list in data %}
-            <div class="hidden w-full h-full group-data-[seleceted-list-to-view='{{ format }}-{{ status }}']:block">
+            <div class="hidden w-full h-full group-data-[selected-list-to-view='{{ format }}-{{ status }}']:block">
               <div class="flex flex-col items-center w-full h-full">
-                <span class="w-[85%] h-10 flex items-center justify-between text-crumb-bright/70 mb-4">
+                <span class="w-[85%] h-10 flex items-center justify-between text-crumb-bright/70 my-4">
                   <span class="flex items-center justify-center h-full p-1 px-4 rounded-md bg-crumb-light/30" onclick="backToListsStatusFromMedia()">
                     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
@@ -1052,9 +1052,9 @@
 
           <template id="[M]-lists.mediaContent@template.grids">
             {% for status, media_list in data %}
-            <div class="hidden w-full h-full group-data-[seleceted-list-to-view='{{ format }}-{{ status }}']:block ">
+            <div class="hidden w-full h-full group-data-[selected-list-to-view='{{ format }}-{{ status }}']:block">
               <div class="flex flex-col items-center w-full h-full">
-                <span class="w-[85%] h-10 flex items-center justify-between text-crumb-bright/70 mb-4">
+                <span class="w-[85%] h-10 flex items-center justify-between text-crumb-bright/70 my-4">
                   <span class="flex items-center justify-center h-full p-1 px-4 rounded-md bg-crumb-light/30" onclick="backToListsStatusFromMedia()">
                     <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18" />
@@ -1090,10 +1090,10 @@
           </template>
 
           <div class="absolute overflow-hidden w-full h-full group-data-[current-lists-section='categories']:translate-x-[200%] group-data-[current-lists-section='status']:translate-x-full group-data-[current-lists-section='media']:translate-x-0 transition-transform group duration-300" id="[M]-lists.mediaContent">
-            <div class="will-change-scroll h-full w-full absolute overflow-x-hidden overflow-y-scroll group-data-[current-lists-format='stacked']:translate-y-0 duration-300 -translate-y-full transition-transform group" id="[M]-lists.mediaContent.stacked" data-seleceted-list-to-view="" style-hide-scrollbar="true">
+            <div class="will-change-scroll h-full w-full absolute overflow-x-hidden overflow-y-scroll group-data-[current-lists-format='stacked']:translate-y-0 duration-300 -translate-y-full transition-transform group" id="[M]-lists.mediaContent.stacked" data-selected-list-to-view="" style-hide-scrollbar="true">
 
             </div>
-            <div class="will-change-scroll h-full w-full overflow-x-hidden overflow-y-scroll absolute group-data-[current-lists-format='grids']:translate-y-0 duration-300 translate-y-full transition-transform group" id="[M]-lists.mediaContent.grids" data-seleceted-list-to-view="" style-hide-scrollbar="true">
+            <div class="will-change-scroll h-full w-full overflow-x-hidden overflow-y-scroll absolute group-data-[current-lists-format='grids']:translate-y-0 duration-300 translate-y-full transition-transform group" id="[M]-lists.mediaContent.grids" data-selected-list-to-view="" style-hide-scrollbar="true">
             </div>
           </div>
         </div>
