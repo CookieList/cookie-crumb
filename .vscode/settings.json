@@ -1,0 +1,8 @@
+{
+    "files.autoSave": "afterDelay",
+    "fiveServer.highlight": true,
+    "fiveServer.openTerminal": false,
+    "fiveServer.injectBody": false,
+    "editor.linkedEditing": true,
+    "files.exclude": {}
+}
