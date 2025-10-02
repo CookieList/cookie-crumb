@@ -202,6 +202,11 @@ function changeMainContent(content) {
     $.state.current_main_content = active_content;
     localStorage.setItem("MAIN_CONTENT", active_content);
 
+    if (active_content === "lists" && !$.state.listSectionFetched) {
+        setTimeout(() => {fetchAndDisplayListsContent("ANIME");}, 500)
+        $.state.listSectionFetched = true;
+    }
+
     $.each(not_active_content, (_, i) => {
         $.id("[H]-" + i)
             .removeClass("text-crumb-bright/90")
@@ -392,6 +397,8 @@ function processResponse(response) {
             duration: media.duration || 0,
             cover: media.coverImage.large,
             url: media.siteUrl,
+            updated: media.mediaListEntry.updatedAt,
+            created: media.mediaListEntry.createdAt,
             list: media.mediaListEntry.status,
             progress: media.mediaListEntry.progress,
             next: media.nextAiringEpisode === null ? null : media.nextAiringEpisode.episode,
@@ -652,10 +659,6 @@ function generateAndDisplayContent(data) {
     setTimeout(() => {
         removeWaitingPage();
     }, 200);
-
-    setTimeout(() => {
-        fetchAndDisplayListsContent("ANIME");
-    }, 500);
 }
 
 function scrollGridScheduleIntoView(day, behavior = "smooth") {
@@ -813,12 +816,16 @@ function gridMoreInfoDisplayToggle(mediaId) {
     element.attr("data-is-clicked", element.attr("data-is-clicked") == "true" ? "false" : "true");
 }
 
+function checkIfDataNotCompleteTemplateTag(media) { // SOME RANDOM BUG WITH NEW BROWSER AND MUSTACHE
+    return (!media.next) || (media.progress < (media.next - 1));
+}
+
 function displayWatchListContentGrids(data) {
-    $.id("[M]-watchlist.grids.content").html(nunjucks.renderString($.id("[M]-watchlist.grids@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon }));
+    $.id("[M]-watchlist.grids.content").html(nunjucks.renderString($.id("[M]-watchlist.grids@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon, checkComplete: checkIfDataNotCompleteTemplateTag }));
 }
 
 function displayWatchListContentStacked(data) {
-    $.id("[M]-watchlist.stacked.content").html(nunjucks.renderString($.id("[M]-watchlist.stacked@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon }));
+    $.id("[M]-watchlist.stacked.content").html(nunjucks.renderString($.id("[M]-watchlist.stacked@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon, checkComplete: checkIfDataNotCompleteTemplateTag }));
 }
 
 function showMediaEditWindow(mediaId, category) {
@@ -1071,7 +1078,7 @@ function normalizeEmptyUI() {
         if (sectionItems.length < 1) {
             var is_already_empty = $("[schedule-of-day-is-empty]", element).length > 0;
             if (!is_already_empty) {
-                element.html(`<span class="text-xs w-full h-full flex items-center justify-center text-crumb-bright/30 text-pretty text-center px-3 italic" schedule-of-day-is-empty>None of the anime from your watchlist airs on this day.</span>`);
+                element.html(`<span class="text-crumb-bright/30 w-full h-full flex justify-center items-center px-3 text-xs italic text-pretty text-center" schedule-of-day-is-empty>None of the anime from your watchlist airs on this day.</span>`);
             }
         }
     });
@@ -1083,7 +1090,7 @@ function normalizeEmptyUI() {
             if (sectionItems.length < 1) {
                 var is_already_empty = $("[schedule-of-day-is-empty]", element).length > 0;
                 if (!is_already_empty) {
-                    $.attribute("schedule-grid-of-day", day).html(`<span class="text-xs w-full h-full flex items-center justify-center text-crumb-bright/40 text-pretty text-center italic col-span-3 py-3" schedule-of-day-is-empty>No anime airing.</span>`);
+                    $.attribute("schedule-grid-of-day", day).html(`<span class="text-crumb-bright/40 w-full h-full flex col-span-3 justify-center items-center py-3 text-xs italic text-pretty text-center" schedule-of-day-is-empty>No anime airing.</span>`);
                 }
             }
         }
@@ -1237,6 +1244,7 @@ function calculateLeftover(section) {
 
 function generateWatchListContent(data) {
     var sectionAiringAnime = data.filter((media) => {
+        // console.log(media) // TODO
         return media.next !== null && media.status === "RELEASING" && media.type === "ANIME";
     });
 
@@ -1290,7 +1298,7 @@ function generateWatchListContent(data) {
     if (sectionDelayedAnime.length) {
         watchlist.push({
             category: "delayedAnime",
-            content: sectionDelayedAnime,
+            content: sectionDelayedAnime.sort((m1, m2) => m2.created - m1.created),
             name: "Delayed Anime",
             type: "anime",
             left: calculateLeftover(sectionDelayedAnime),
@@ -1299,7 +1307,7 @@ function generateWatchListContent(data) {
     if (sectionAnimeInProgress.length) {
         watchlist.push({
             category: "animeInProgress",
-            content: sectionAnimeInProgress,
+            content: sectionAnimeInProgress.sort((m1, m2) => m2.updated - m1.updated),
             name: "Anime in Progress",
             type: "anime",
             left: calculateLeftover(sectionAnimeInProgress),
@@ -1308,7 +1316,7 @@ function generateWatchListContent(data) {
     if (sectionMovieInProgress.length) {
         watchlist.push({
             category: "movieInProgress",
-            content: sectionMovieInProgress,
+            content: sectionMovieInProgress.sort((m1, m2) => m2.created - m1.created),
             name: "Movie in Progress",
             type: "anime",
             left: calculateLeftover(sectionMovieInProgress),
@@ -1317,7 +1325,7 @@ function generateWatchListContent(data) {
     if (sectionMusicInProgress.length) {
         watchlist.push({
             category: "musicInProgress",
-            content: sectionMusicInProgress,
+            content: sectionMusicInProgress.sort((m1, m2) => m2.created - m1.created),
             name: "Music in Progress",
             type: "anime",
             left: calculateLeftover(sectionMusicInProgress),
@@ -1335,7 +1343,7 @@ function generateWatchListContent(data) {
     if (sectionAnimeOnHiatus.length) {
         watchlist.push({
             category: "animeOnHiatus",
-            content: sectionAnimeOnHiatus,
+            content: sectionAnimeOnHiatus.sort((m1, m2) => m2.created - m1.created),
             name: "Anime on Hiatus",
             type: "anime",
             left: calculateLeftover(sectionAnimeOnHiatus),
@@ -1353,7 +1361,7 @@ function generateWatchListContent(data) {
     if (sectionMangaInProgress.length) {
         watchlist.push({
             category: "mangaInProgress",
-            content: sectionMangaInProgress,
+            content: sectionMangaInProgress.sort((m1, m2) => m2.updated - m1.updated),
             name: "Manga in Progress",
             type: "manga",
             left: calculateLeftover(sectionMangaInProgress),
@@ -1362,7 +1370,7 @@ function generateWatchListContent(data) {
     if (sectionNovelInProgress.length) {
         watchlist.push({
             category: "novelInProgress",
-            content: sectionNovelInProgress,
+            content: sectionNovelInProgress.sort((m1, m2) => m2.updated - m1.updated),
             name: "Novel in Progress",
             type: "manga",
             left: calculateLeftover(sectionNovelInProgress),

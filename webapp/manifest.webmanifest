@@ -1,9 +1,9 @@
 {
     "name": "CookieCrumbs",
     "short_name": "CookieCrumbs",
-    "description": "AniList Client for seemless updates",
-    "scope": "/cookie-crumb/webapp/",
-    "start_url": "/cookie-crumb/webapp/",
+    "description": "AniList Client for seamless updates",
+    "scope": "/cookie-crumb/",
+    "start_url": "/cookie-crumb/",
     "background_color": "#121316",
     "theme_color": "#121316",
     "display": "standalone", 

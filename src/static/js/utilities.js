@@ -123,7 +123,6 @@ fragment media on MediaListCollection {
                 duration
                 isFavourite
                 chapters
-                episodes
                 coverImage {
                     large
                 }
@@ -136,6 +135,8 @@ fragment media on MediaListCollection {
                     progressVolumes
                     status
                     repeat
+                    updatedAt
+                    createdAt
                     score(format: POINT_100)
                 }
                 siteUrl
