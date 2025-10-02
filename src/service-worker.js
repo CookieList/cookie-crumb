@@ -1,11 +1,12 @@
 var GHPATH = '/cookie-crumb/webapp';
-var VERSION = '0.1';
+var VERSION = '0.2';
 
 
 var APP_PREFIX = 'cookie_crumb_';
 var URLS = [    
   `${GHPATH}/`,
   `${GHPATH}/index.html`,
+  `${GHPATH}/application.html`,
   `${GHPATH}/static/favicon.ico`,
   `${GHPATH}/static/favicon.png`,
   `${GHPATH}/static/spin.apng`,

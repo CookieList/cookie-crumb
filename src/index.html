@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="webapp/static/favicon.ico">
-    <link rel="manifest" href="webapp/manifest.webmanifest">
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="manifest" href="manifest.webmanifest">
     <title>CookieCrumbs</title>
-    <link rel="stylesheet" href="webapp/static/css/tailwind.min.css" />
+    <link rel="stylesheet" href="static/css/tailwind.min.css" />
   </head>
   <body class="bg-crumb font-['Victor_Mono'] text-crumb-bright w-full h-full justify-center items-center m-0">
     <div class="bg-[radial-gradient(var(--tw-gradient-stops,at_50%_75%))] from-crumb-accent/10 to-90% to-crumb-dark via-crumb-accent/20 w-full h-full absolute flex justify-center items-center">
@@ -17,15 +17,10 @@
     </div>
     <script>
     if (navigator.serviceWorker) {
-      if (location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname === "") {
-        //navigator.serviceWorker.register ( 
-        //  '/webapp/service-worker.js',
-        //  {scope: '/webapp/'}
-        //)
-      } else {
+      if (!location.hostname === "localhost" || !location.hostname === "127.0.0.1" || !location.hostname === "") {
         navigator.serviceWorker.register (
           '/cookie-crumb/webapp/service-worker.js',
-          {scope: '/cookie-crumb/'}
+          {scope: '/cookie-crumb/webapp/'}
         )
       }
     }
