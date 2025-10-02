@@ -18,7 +18,7 @@
     "build": "npm run clean && npm run build:css && npm run build:html && npm run build:js && npm run build:image && npm run build:pwa",
     "watch": "concurrently npm:watch-tailwind npm:watch-css npm:watch-js npm:watch-html npm:watch-image",
     "server": "five-server",
-    "publish": "npm run build && git push origin main:main",
+    "publish": "npm run build && git add -A -- . && git push origin main:main",
     "dev": "npm run build && npm run substitute && concurrently npm:watch-tailwind npm:watch-css npm:watch-js npm:watch-html npm:watch-image npm:server"
   },
   "devDependencies": {
