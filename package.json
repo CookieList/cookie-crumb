@@ -4,7 +4,7 @@
   "description": "AniList Client",
   "scripts": {
     "build:css": "npx tailwindcss -i src/static/css/tailwind.css -o webapp/static/css/tailwind.min.css --minify && npx minify src/static/css/main.css > webapp/static/css/main.min.css && npx minify src/static/css/victormono.css > webapp/static/css/victormono.min.css",
-    "build:html": "npx minify src/index.html > webapp/index.html && npx minify src/app.html > ./index.html",
+    "build:html": "npx minify src/index.html > webapp/index.html && npx minify src/application.html > webapp/application.html",
     "build:js": "npx copyfiles -u 1 src/static/js/*.min.js webapp && npx uglifyjs src/static/js/utilities.js src/static/js/main.js --compress --mangle --output webapp/static/js/main.min.js",
     "build:image": "npx copyfiles -u 1 src/static/*.{ico,png,apng,jpg} webapp",
     "build:pwa": "npx copyfiles -u 1 src/service-worker.js webapp && npx copyfiles -u 1 src/manifest.webmanifest webapp && npx copyfiles -u 1 src/static/pwa/*.png webapp",
