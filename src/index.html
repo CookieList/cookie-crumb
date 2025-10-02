@@ -16,13 +16,11 @@
       </iframe>
     </div>
     <script>
-    if (navigator.serviceWorker) {
-      if (!location.hostname === "localhost" || !location.hostname === "127.0.0.1" || !location.hostname === "") {
-        navigator.serviceWorker.register (
-          '/cookie-crumb/webapp/service-worker.js',
-          {scope: '/cookie-crumb/webapp/'}
-        )
-      }
+    if (navigator.serviceWorker && location.hostname !== "localhost" && location.hostname !== "127.0.0.1" && location.hostname !== "") {
+      navigator.serviceWorker.register (
+        '/cookie-crumb/webapp/service-worker.js',
+        {scope: '/cookie-crumb/webapp/'}
+      )
     }
     </script>
   </body>
