@@ -820,12 +820,17 @@ function checkIfDataNotCompleteTemplateTag(media) { // SOME RANDOM BUG WITH NEW 
     return (!media.next) || (media.progress < (media.next - 1));
 }
 
+function calculateMediaProgressBarForCss(media) {
+    var percentage = (media.progress / (media.episodes || media.progress)) * 100
+    return String(percentage) + "%"
+}
+
 function displayWatchListContentGrids(data) {
-    $.id("[M]-watchlist.grids.content").html(nunjucks.renderString($.id("[M]-watchlist.grids@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon, checkComplete: checkIfDataNotCompleteTemplateTag }));
+    $.id("[M]-watchlist.grids.content").html(nunjucks.renderString($.id("[M]-watchlist.grids@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon, checkComplete: checkIfDataNotCompleteTemplateTag, calculateProgress: calculateMediaProgressBarForCss }));
 }
 
 function displayWatchListContentStacked(data) {
-    $.id("[M]-watchlist.stacked.content").html(nunjucks.renderString($.id("[M]-watchlist.stacked@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon, checkComplete: checkIfDataNotCompleteTemplateTag }));
+    $.id("[M]-watchlist.stacked.content").html(nunjucks.renderString($.id("[M]-watchlist.stacked@template").html(), { categories: data, humanTime: humantimeFormat, getIcon: getWatchListIcon, checkComplete: checkIfDataNotCompleteTemplateTag, calculateProgress: calculateMediaProgressBarForCss }));
 }
 
 function showMediaEditWindow(mediaId, category) {
@@ -1244,7 +1249,6 @@ function calculateLeftover(section) {
 
 function generateWatchListContent(data) {
     var sectionAiringAnime = data.filter((media) => {
-        // console.log(media) // TODO
         return media.next !== null && media.status === "RELEASING" && media.type === "ANIME";
     });
 

@@ -470,7 +470,7 @@
                     {% endif %}
                     <div class="flex items-center">
                       <div class="bg-crumb-bright/5 w-full h-2 flex rounded-full">
-                        <span class="h-full rounded-full transiton-crumb duration-300 group-data-[not-complete='true']:bg-crumb-accent/20 bg-crumb-bright/30 w-[var(--percentage-complete)]" style="--percentage-complete: {{ (media.progress / (media.episodes or media.progress)) * 100 }}%" stacked-percentage-progress-indicator></span>
+                        <span class="h-full rounded-full transiton-crumb duration-300 group-data-[not-complete='true']:bg-crumb-accent/20 bg-crumb-bright/30 w-[var(--percentage-complete)]" style="--percentage-complete: attr(data-percentage-complete type(<percentage>), 0%)" data-percentage-complete="{{ calculateProgress(media) }}" stacked-percentage-progress-indicator></span>
                       </div>
                       <span class="-mt-1 text-[0.6rem] text-crumb-bright/50 ml-2.5 font-bold select-none"><span class="text-crumb-bright/80" current-progress-indicator>{{ media.progress | replace("0", "O") }}</span>/{{ media.episodes | default('?', true) }}</span>
                     </div>
